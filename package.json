@@ -1,0 +1,31 @@
+{
+  "name": "zoom-clone",
+  "description": "Zoom clone using webrtc and websocket",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.18.10",
+    "@babel/node": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soonki-98/zoom-clone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/soonki-98/zoom-clone/issues"
+  },
+  "homepage": "https://github.com/soonki-98/zoom-clone#readme"
+}
