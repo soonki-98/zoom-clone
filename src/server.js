@@ -13,13 +13,17 @@ const handleListen = () => {
   console.log("Listening on http://localhost:3000");
 };
 
+const sockets = [];
+
 const handleConnection = (socket) => {
   console.log("Connect to Browser");
-  socket.on("close", () => {
-    console.log("Disconnected from Browser");
-  });
-  socket.on("message", (message, isBinary) => {
-    console.log("New message from Browser: ", isBinary ? message : message.toString());
+  sockets.push(socket);
+  socket.on("close", () => console.log("Disconnected from Browser"));
+  socket.on("message", (data, isBinary) => {
+    const { message, sender } = JSON.parse(data.toString());
+    sockets.forEach((s) => {
+      if (s !== socket) s.send(`${sender} send ${message}`);
+    });
   });
   socket.send("hello!!!");
 };
