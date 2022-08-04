@@ -14,7 +14,14 @@ const handleListen = () => {
 };
 
 const handleConnection = (socket) => {
-  console.log(socket);
+  console.log("Connect to Browser");
+  socket.on("close", () => {
+    console.log("Disconnected from Browser");
+  });
+  socket.on("message", (message, isBinary) => {
+    console.log("New message from Browser: ", isBinary ? message : message.toString());
+  });
+  socket.send("hello!!!");
 };
 
 const server = http.createServer(app);
