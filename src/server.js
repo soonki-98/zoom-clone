@@ -22,10 +22,9 @@ const handleConnection = (socket) => {
   socket.on("message", (data, isBinary) => {
     const { message, sender } = JSON.parse(data.toString());
     sockets.forEach((s) => {
-      if (s !== socket) s.send(`${sender} send ${message}`);
+      s.send(JSON.stringify({ msg: message, sender }));
     });
   });
-  socket.send("hello!!!");
 };
 
 const server = http.createServer(app);

@@ -8,10 +8,13 @@ html(lang="en")
         link(rel="stylesheet", href="https://unpkg.com/mvp.css")
     body 
         header
-            h1 Soom
+            h1 Soom'
         main 
+            form(id="nickname")
+                input( type="text", placeholder="choose a nickname", required)
+                button Save
             ul
-            form
-                input(type="text", placeholder="write a msg", required)
+            form(id="message")
+                input(id="message" type="text", placeholder="write a msg", required)
                 button Send
         script(src="/public/js/app.js") 
