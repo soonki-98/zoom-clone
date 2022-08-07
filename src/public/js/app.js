@@ -2,6 +2,8 @@ const messageList = document.querySelector("ul");
 const messageForm = document.querySelector("#message");
 const nicknameForm = document.querySelector("#nickname");
 const socket = new WebSocket(`ws://${window.location.host}`);
+
+const ID = (Math.random() * 100).toFixed(0);
 let senderNickname = "";
 
 socket.addEventListener("open", (e) => {
@@ -9,10 +11,10 @@ socket.addEventListener("open", (e) => {
 });
 
 socket.addEventListener("message", (message) => {
-  const { msg, sender } = JSON.parse(message.data);
+  const { msg, sender, id } = JSON.parse(message.data);
   const li = document.createElement("li");
   li.style.listStyle = "none";
-  if (sender === senderNickname) {
+  if (id === ID) {
     li.style.textAlign = "right";
   }
   li.innerText = `${sender}: ${msg}`;
@@ -26,7 +28,7 @@ socket.addEventListener("close", () => {
 const handleSubmit = (e) => {
   e.preventDefault();
   const input = messageForm.querySelector("input");
-  socket.send(JSON.stringify({ message: input.value, sender: senderNickname }));
+  socket.send(JSON.stringify({ message: input.value, sender: senderNickname, id: ID }));
   input.value = "";
 };
 
@@ -37,6 +39,5 @@ const handleNickname = (e) => {
   input.value = "";
 };
 
-console.log(nicknameForm);
 messageForm.addEventListener("submit", handleSubmit);
 nicknameForm.addEventListener("submit", handleNickname);

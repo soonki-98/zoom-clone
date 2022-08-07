@@ -20,9 +20,9 @@ const handleConnection = (socket) => {
   sockets.push(socket);
   socket.on("close", () => console.log("Disconnected from Browser"));
   socket.on("message", (data, isBinary) => {
-    const { message, sender } = JSON.parse(data.toString());
+    const { message, sender, id } = JSON.parse(data.toString());
     sockets.forEach((s) => {
-      s.send(JSON.stringify({ msg: message, sender }));
+      s.send(JSON.stringify({ msg: message, sender: sender || "익명", id }));
     });
   });
 };
