@@ -12,8 +12,8 @@ app.get("/", (req, res) => res.render("home"));
 const httpServer = http.createServer(app);
 const io = SocketIO(httpServer);
 
-const handleListen = () => {
-  console.log("Listening on http://localhost:3000");
-};
+io.on("connection", (socket) => {
+  console.log(socket);
+});
 
-httpServer.listen(3000, handleListen);
+httpServer.listen(3000, () => console.log("Listening on http://localhost:3000"));
