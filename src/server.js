@@ -13,7 +13,7 @@ const httpServer = http.createServer(app);
 const io = SocketIO(httpServer);
 
 io.on("connection", (socket) => {
-  console.log(socket);
+  socket.on("enterRoom", (msg) => console.log(msg));
 });
 
 httpServer.listen(3000, () => console.log("Listening on http://localhost:3000"));
