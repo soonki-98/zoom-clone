@@ -1,0 +1,4 @@
+export const SOCKET_EVENTS = {
+  CREATE_ROOM: "CREATE_ROOM",
+  ENTER_ROOM: "ENTER_ROOM",
+};
