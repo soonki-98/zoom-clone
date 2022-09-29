@@ -6,16 +6,25 @@ const SOCKET_EVENTS = {
 const socket = io();
 
 const welcomeDiv = document.getElementById("welcome");
+const roomDiv = document.getElementById("room");
 const form = welcomeDiv.querySelector("form");
 
-const backendDone = () => {
-  alert("::::::done");
+let roomName = "";
+
+roomDiv.hidden = true;
+
+const showRoom = () => {
+  welcomeDiv.hidden = true;
+  roomDiv.hidden = false;
+  roomDiv.querySelector("h1").innerText = roomName;
+  alert("join room!");
 };
 
 const handleRoomSubmit = (e) => {
   e.preventDefault();
   const input = form.querySelector("input");
-  socket.emit(SOCKET_EVENTS.ENTER_ROOM, { roomName: input.value }, backendDone);
+  roomName = input.value;
+  socket.emit(SOCKET_EVENTS.ENTER_ROOM, { roomName }, showRoom);
   input.value = "";
 };
 

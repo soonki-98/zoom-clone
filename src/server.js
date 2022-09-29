@@ -12,19 +12,15 @@ app.get("/", (req, res) => res.render("home"));
 
 const httpServer = http.createServer(app);
 const io = SocketIO(httpServer);
-const rooms = {};
 
 io.on("connection", (socket) => {
+  socket.onAny((event) => {
+    console.log(`SocketEvent = ${event}`);
+  });
   socket.on(SOCKET_EVENTS.ENTER_ROOM, (payload, done) => {
     const { roomName } = payload;
-    rooms[roomName] = {
-      name: roomName,
-      status: "opened",
-    };
-    setTimeout(() => {
-      done();
-    }, 1000);
-    console.log(rooms);
+    socket.join(roomName);
+    done();
   });
 });
 
