@@ -20,6 +20,11 @@ io.on("connection", (socket) => {
   socket.on(SOCKET_EVENTS.ENTER_ROOM, (payload, done) => {
     const { roomName } = payload;
     socket.join(roomName);
+    socket.on(SOCKET_EVENTS.SEND_MESSAGE, (payload) => {
+      const { message } = payload;
+      socket.to(roomName).emit(SOCKET_EVENTS.SEND_MESSAGE, message);
+    });
+
     done();
   });
 });
